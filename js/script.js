@@ -151,6 +151,8 @@ function initCurMap() {
     	currentArr = map2arr(romaHiraganaMap)
     } else if (curType === "type-6") {
     	currentArr = map2arr(romaKatakanaMap)
+    } else if (curType === "type-7") {
+        currentArr = map2arr(hiraganaPureMap).concat(map2arr(katakanaPureMap))
     }
 }
 
@@ -159,6 +161,9 @@ function initCurMap() {
 typeEl.addEventListener("change", function () {
 	curType = this.value;
 	initCurMap();
+	answerEl.placeholder = curType === "type-5" || curType === "type-6"
+		? "输入假名"
+		: "输入罗马音";
     // 更新下一个音符
     newSyllable();
 });
@@ -181,6 +186,10 @@ function checkAnswer() {
 		success++;
 		isError = false;
 		tipsEl.style.display = 'none';
+		if (currentArr.length === 0) {
+			alert("完成一轮，重置随机");
+			initCurMap();
+		}
 		newSyllable();
 	} else {
 		console.log(currentSyllable)
@@ -201,10 +210,6 @@ function checkAnswer() {
 	}
 	sucRateEl.innerText = success + "/" + count;
 	leftCountEl.innerText = currentArr.length;
-	if (currentArr.length == 0) {
-		alert("完成一轮，重置随机");
-		initCurMap(curType);
-	}
 }
 
 
