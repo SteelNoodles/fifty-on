@@ -153,6 +153,8 @@ function initCurMap() {
     	currentArr = map2arr(romaKatakanaMap)
     } else if (curType === "type-7") {
         currentArr = map2arr(hiraganaPureMap).concat(map2arr(katakanaPureMap))
+    } else if (curType === "type-8") {
+        currentArr = map2arr(hiraganaRomaMap).concat(map2arr(katakanaRomaMap))
     }
 }
 
